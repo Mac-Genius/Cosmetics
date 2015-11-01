@@ -1,0 +1,4 @@
+name: Cosmetics
+main: io.github.mac_genius.cosmetics.Cosmetics
+version: 1.0
+softdepend: [SQLPermissions]

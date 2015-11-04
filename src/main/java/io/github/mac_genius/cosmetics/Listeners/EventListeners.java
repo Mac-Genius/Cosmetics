@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryInteractEvent;
@@ -55,12 +56,16 @@ public class EventListeners implements Listener {
         }
     }
 
-    @EventHandler
-    public void clickPet(PlayerInteractAtEntityEvent event) {
-        for (Player p : settings.getPlayerData().keySet()) {
-            if (event.getRightClicked().equals(settings.getPlayerData().get(p).getPet())) {
-                event.getPlayer().sendMessage(ChatColor.GREEN + event.getRightClicked().getCustomName() + " isn't your pet.");
-                event.setCancelled(true);
+    @EventHandler(priority = EventPriority.LOW)
+    public void clickPet(PlayerInteractEntityEvent event) {
+        if (settings.getPlayerData().get(event.getPlayer()).getPet() != event.getRightClicked()) {
+            for (Player p : settings.getPlayerData().keySet()) {
+                if (p != event.getPlayer()) {
+                    if (settings.getPlayerData().get(p).getPet() == event.getRightClicked()) {
+                        event.getPlayer().sendMessage(ChatColor.GREEN + event.getRightClicked().getCustomName() + ChatColor.GREEN + " isn't your pet.");
+                        event.setCancelled(true);
+                    }
+                }
             }
         }
     }

@@ -42,4 +42,8 @@ public class PluginSettings {
     public Map<Player, PlayerData> getPlayerData() {
         return playerData;
     }
+
+    public SQLConnect getConnect() {
+        return connect;
+    }
 }

@@ -14,11 +14,18 @@ public class PetMenu {
     private PluginSettings settings;
     private SQLConnect connect;
 
+    /**
+     * @param settings
+     */
     public PetMenu(PluginSettings settings) {
         this.settings = settings;
         connect = new SQLConnect(settings);
     }
 
+    /**
+     *
+     * @param player
+     */
     public void addMenu(Player player) {
         Connection connection = connect.getConnection();
         String uuid = player.getUniqueId().toString();
@@ -81,6 +88,10 @@ public class PetMenu {
         }
     }
 
+    /**
+     * @param uuid
+     * @param pet
+     */
     public void unlockPet(String uuid, String pet) {
         Connection connection = connect.getConnection();
         try {

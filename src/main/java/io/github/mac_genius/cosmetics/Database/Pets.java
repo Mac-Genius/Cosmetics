@@ -63,14 +63,14 @@ public class Pets {
         try {
             PreparedStatement fetch = connection.prepareStatement("SELECT * FROM Pets WHERE Owner='" + owner + "' AND Type='" + type + "'");
             ResultSet results = fetch.executeQuery();
-            String owneruuid = "";
-            String name = "";
-            String petType = "";
+            String ownerUUID;
+            String name;
+            String petType;
             while (results.next()) {
-                owneruuid = results.getString(2);
+                ownerUUID = results.getString(2);
                 name = results.getString(3);
                 petType = results.getString(4);
-                pet = new Pet(owneruuid, name, petType);
+                pet = new Pet(ownerUUID, name, petType);
             }
             connection.close();
             return pet;
